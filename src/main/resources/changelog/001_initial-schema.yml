@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+     id: "1"
+     author: "Gary"
+     createTable:
+         tableName: "person"
+         columns:
+           - column:
+             - name: "id"
+               type: "bigint"
+               constraints:
+                   primaryKey: true
+                   nullable: false
+           - column:
+             - name: "name"
+               type: "varchar(100)"
+               constraints:
+                   primaryKey: true
+                   nullable: false
