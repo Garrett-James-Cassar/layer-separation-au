@@ -28,7 +28,10 @@ class LayerSeparationTests {
                     dependency.targetClass.packageName.contains(BASE_PACKAGE) && !(
                         dependency.targetClass.packageName.contains("adaptor")
                         || dependency.targetClass.packageName.contains("service")
-                        || dependency.targetClass.packageName.contains("dto"))
+                                || dependency.targetClass.packageName.contains("dto")
+                                || dependency.targetClass.packageName.contains("stub.database")
+
+                            )
                 }
 
                 if (disallowedDependencies.isNotEmpty()) {
