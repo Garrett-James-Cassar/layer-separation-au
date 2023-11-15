@@ -1,5 +1,6 @@
 package cool.project.dto.entity
 
+import cool.project.domain.Skill
 import jakarta.persistence.*
 
 @Entity
@@ -16,10 +17,13 @@ data class CandidateEntity(
     @Column(name = "age", nullable = false)
     val age: Int,
 
+    @Column(name = "skills", nullable = false)
+    val skills: List<Skill>,
+
     @ElementCollection
     @CollectionTable(name = "skills_mapping", joinColumns = [JoinColumn(name = "candidate_id")])
     @MapKeyColumn(name = "skill_key")
     @Column(name = "skill_value")
-    val skills: Map<String, String>
+    val subSkillsMap: Map<String, String>
 )
 

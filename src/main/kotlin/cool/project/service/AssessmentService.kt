@@ -3,8 +3,8 @@ package cool.project.service
 import cool.project.adaptor.CandidateAdaptor
 import cool.project.adaptor.ExpertAdaptor
 import cool.project.connectors.repositories.CandidateRepository
-import cool.project.connectors.repositories.HardCodedExpertRepository
-import cool.project.domain.enums.Skill
+import cool.project.stub.database.HardCodedExpertRepository
+import cool.project.domain.enums.SubSkill
 import cool.project.dto.entity.CandidateEntity
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
@@ -21,12 +21,12 @@ class AssessmentService(
         val candidateEntity : CandidateEntity = candidateRepository.findByIdOrNull(id)!!
         val candidate = candidateAdaptor.toDomain(candidateEntity)
         val expert = expertAdaptor.toDomain(expertRepository.findBySkill(skillUnderAssessment))
-        val typedSkillUnderAssessment = Skill.valueOf(skillUnderAssessment)
+        val typedSkillUnderAssessment = SubSkill.valueOf(skillUnderAssessment)
 
         return if(candidate.isAdult()) {
-            expert.verbalFeedbackMappingForGrownUps[candidate.skills[typedSkillUnderAssessment]]!!
+            expert.verbalFeedbackMappingForGrownUps[candidate.subSkillLevels[typedSkillUnderAssessment]]!!
         } else {
-            expert.verbalFeedbackMappingForChildren[candidate.skills[typedSkillUnderAssessment]]!!
+            expert.verbalFeedbackMappingForChildren[candidate.subSkillLevels[typedSkillUnderAssessment]]!!
         }
     }
 

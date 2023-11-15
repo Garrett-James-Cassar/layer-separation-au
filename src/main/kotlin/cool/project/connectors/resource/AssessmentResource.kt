@@ -1,6 +1,6 @@
 package cool.project.connectors.resource
 
-import cool.project.domain.enums.Skill
+import cool.project.domain.Skill
 import cool.project.service.AssessmentService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
