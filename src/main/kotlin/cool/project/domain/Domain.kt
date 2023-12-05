@@ -9,15 +9,9 @@ data class Candidate(val name: String, val age : Int, val skills: List<Skill>, v
 
 data class ExpertDomain(
     val name: String,
-    val skillQualifiedToAssess: Skill,
-    val verbalFeedbackMappingForGrownUps : Map<SubSkillLevel, String>,
-    val verbalFeedbackMappingForChildren : Map<SubSkillLevel, String>) {
+    val skillQualifiedToAssess: Skill
+)
 
-    fun mapSkillLevelToVerbalFeedback(subSkillLevel: SubSkillLevel, isGrownup : Boolean) : String {
-        return if (isGrownup) verbalFeedbackMappingForGrownUps[subSkillLevel]!!
-        else verbalFeedbackMappingForChildren[subSkillLevel]!!
-    }
-}
 
 data class Assessment(val skillAssessed: Skill, val subSkillLevel : SubSkillLevel)
 

@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+     id: "3"
+     author: "Gary"
+     createTable:
+       tableName: "candidate_skills"
+       columns:
+         - column:
+             name: "skill"
+             type: "VARCHAR(255)"
+         - column:
+             name: "candidate"
+             type: "VARCHAR(255)"
+             constraints:
+               nullable: false
+         - column:
+             name: "avg_skill_value"
+             type: "DOUBLE"
+             constraints:
+               nullable: true
+
+       primaryKey:
+         - column:
+             name: candidate
+         - column:
+             name: skill_name
+
+
+         - addForeignKeyConstraint:
+             baseTableName: candidate_skills
+             baseColumnNames: candidate_id
+             constraintName: fk_candidate_skills_candidate
+             referencedTableName: candidate
+             referencedColumnNames: candidate_id
+
+         - addForeignKeyConstraint:
+             baseTableName: candidate_skills
+             baseColumnNames: skill
+             constraintName: fk_skills_skills_candidate
+             referencedTableName: skill
+             referencedColumnNames: skill_name

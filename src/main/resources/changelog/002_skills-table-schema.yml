@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+     id: "2"
+     author: "Gary"
+     createTable:
+       tableName: "skill"
+       columns:
+         - column:
+             name: "skill_name"
+             type: "VARCHAR(255)"

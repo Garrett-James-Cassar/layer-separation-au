@@ -1,3 +1,13 @@
 databaseChangeLog:
   - include:
-      file: changelog/001_initial-schema.yml
+      file: changelog/001_candidate-schema.yml
+  - include:
+      file: changelog/002_skills-table-schema.yml
+  - include:
+      file: changelog/003_candidate_skills-table-schema.yml
+  - include:
+      file: changelog/004_sub_skills_mapping-table-schema.yml
+  - include:
+      file: changelog/005_feedback-schema.yml
+  - include:
+      file: changelog/006_expert-table-schema.yml

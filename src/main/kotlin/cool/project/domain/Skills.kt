@@ -4,11 +4,12 @@ import cool.project.domain.enums.SubSkill
 import cool.project.domain.enums.SubSkill.*
 
 sealed class Skill(val subskills: List<SubSkill> = emptyList()) {
-    fun name() = this.javaClass.name
+    fun name() : String = this.javaClass.simpleName
 }
-private class Coding : Skill(listOf(LayerSeparation, Testing, Readability, LackOfFlair))
-private class Cooking : Skill(listOf(Plating, Flavouring, TemperatureControl))
-class DancingTheFlamenco : Skill(listOf(Timing, Coordindation, Passion, Flair))
+
+class Coding : Skill(subskills = listOf(LayerSeparation, Testing, Readability, LackOfFlair))
+class Cooking : Skill(subskills = listOf(Plating, Flavouring, TemperatureControl))
+class DancingTheFlamenco : Skill(subskills = listOf(Timing, Coordindation, Passion, Flair))
 class Unknown : Skill(listOf())
 
 

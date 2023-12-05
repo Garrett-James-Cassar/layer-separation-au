@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+     id: "5"
+     author: "Gary"
+     changes:
+     createTable:
+       tableName: "expert"
+       columns:
+         - column:
+             name: "name"
+             type: "VARCHAR(255)"
+             constraints:
+               primaryKey: true
+               nullable: false
+         - column:
+             name: "skillQualifiedToAssess"
+             type: "BIGINT"  # Adjust the type based on the data type of the ID in skills_mapping
+             constraints:
+               nullable: false
+

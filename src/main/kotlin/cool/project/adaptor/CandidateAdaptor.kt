@@ -1,26 +1,18 @@
 package cool.project.adaptor
 
 import cool.project.domain.Candidate
+import cool.project.domain.skillMap
 import cool.project.dto.entity.CandidateEntity
+import cool.project.dto.entity.CandidateSkillsEntity
 import cool.project.dto.http.CandidateRequestResponse
-import org.springframework.stereotype.Component
-import java.lang.Math.random
+import java.util.UUID
 
-@Component
-class CandidateAdaptor {
-    fun toDomain(candidateRequestResponse: CandidateRequestResponse) =
-        Candidate(candidateRequestResponse.name, candidateRequestResponse.age,
-            candidateRequestResponse.skills)
+fun CandidateRequestResponse.toDomain() = Candidate(name, age, skillsToAssesses.map { skillMap[it.lowercase()]!! })
 
-    fun toDomain(candidateEntity: CandidateEntity) =
-        Candidate(candidateEntity.name, candidateEntity.age,
-            candidateEntity.skills)
+fun CandidateEntity.toDomain() = Candidate(name, age, skills.map { it.toDomain() })
 
-    fun toDto(candidate: Candidate) =
-        CandidateRequestResponse(candidate.name, candidate.age, candidate.skills)
+fun Candidate.toDto() = CandidateRequestResponse(name, age, skills.map { it.name() })
 
-    fun toEntity(candidate: Candidate) =
-        CandidateEntity(id = random().toLong(), candidate.name, candidate.age, candidate.skills, emptyMap())
-
-}
+fun Candidate.toEntity(skillEntities: List<CandidateSkillsEntity> = emptyList()): CandidateEntity =
+    CandidateEntity(name, age, skillEntities)
 

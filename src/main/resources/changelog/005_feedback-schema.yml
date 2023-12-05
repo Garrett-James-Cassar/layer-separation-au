@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+     id: "4"
+     author: "Gary"
+     createTable:
+        tableName: "verbal_feedback"
+        columns:
+          - column:
+              name: "skill_level"
+              type: "VARCHAR(255)"
+              constraints:
+                nullable: false
+          - column:
+              name: "is_adult"
+              type: "BOOLEAN"
+              constraints:
+                nullable: false
+          - column:
+              name: "expert_name"
+              type: "VARCHAR(255)"
+              constraints:
+                nullable: false
+          - column:
+              name: "feedback"
+              type: "VARCHAR(255)"
+              constraints:
+                nullable: false
+        primaryKey:
+          - column:
+              name: "skill_level"
+          - column:
+              name: "is_adult"
+          - column:
+              name: "expert_name"

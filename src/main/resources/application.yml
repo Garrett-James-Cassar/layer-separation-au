@@ -4,13 +4,14 @@ spring:
     driver-class-name: org.h2.Driver
     username: sa
     password:
+    hibernate:
+      show_sql: true
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   liquibase:
     change-log: changelog/changelog-master.yml
   r2dbc:
     enabled: false
     pool:
       enabled: true
-
-debug: true
-
 

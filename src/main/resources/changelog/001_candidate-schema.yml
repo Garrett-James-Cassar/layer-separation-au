@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+     id: "1"
+     author: "Gary"
+     createTable:
+       tableName: "candidate"
+       columns:
+         - column:
+             name: "name"
+             type: "VARCHAR(255)"
+             constraints:
+               primaryKey: true
+               nullable: false
+               autoIncrement: true
+         - column:
+             name: "age"
+             type: "INT"
+             constraints:
+               nullable: false

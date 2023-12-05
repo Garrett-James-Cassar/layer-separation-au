@@ -6,18 +6,8 @@ import cool.project.domain.enums.SubSkillLevel
 import cool.project.dto.entity.ExpertEntity
 import org.springframework.stereotype.Component
 
-@Component
-class ExpertAdaptor {
-    fun toDomain(expertEntity: ExpertEntity) =
-        ExpertDomain(
-            expertEntity.name,
-            expertEntity.skillQualifiedToAssess,
-            expertEntity.verbalFeedbackMappingForGrownUps.map { (key, value) -> SubSkillLevel.valueOf(key) to value }.toMap(),
-            expertEntity.verbalFeedbackMappingForChildren.map { (key, value) -> SubSkillLevel.valueOf(key) to value }.toMap()
-        )
+fun ExpertEntity.toDomain() : ExpertDomain =
+    ExpertDomain(name, skill.toDomain())
 
-    fun toEntity(expertDomain: ExpertDomain) =
-        ExpertEntity(expertDomain.name, expertDomain.skillQualifiedToAssess,
-            expertDomain.verbalFeedbackMappingForGrownUps.map { (key, value) -> key.name to value }.toMap(),
-            expertDomain.verbalFeedbackMappingForChildren.map { (key, value) -> key.name to value }.toMap())
-}
+//fun ExpertDomain.toEntity() : ExpertEntity =
+//    ExpertEntity(name, skillQualifiedToAssess.toEntity())

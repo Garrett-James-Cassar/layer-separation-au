@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+     id: "3"
+     author: "Gary"
+     createTable:
+       tableName: "sub_skills_mapping"
+       columns:
+         - column:
+             name: "id"
+             type: "BIGINT"
+             constraints:
+               primaryKey: true
+               nullable: false
+               autoIncrement: true
+         - column:
+             name: "sub_skill_name"
+             type: "VARCHAR(255)"
+             constraints:
+               nullable: false
+         - column:
+             name: "sub_skill_value"
+             type: "VARCHAR(255)"
+             constraints:
+               nullable: true
+         - column:
+             name: "skill_id"
+             type: "BIGINT"
+             constraints:
+               nullable: false
+
