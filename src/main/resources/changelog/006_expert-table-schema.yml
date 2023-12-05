@@ -13,8 +13,14 @@ databaseChangeLog:
                primaryKey: true
                nullable: false
          - column:
-             name: "skillQualifiedToAssess"
-             type: "BIGINT"  # Adjust the type based on the data type of the ID in skills_mapping
+             name: "skill_name"
+             type: "VARCHAR(255)"  # Adjust the type based on the data type of the ID in skills_mapping
              constraints:
                nullable: false
 
+         - addForeignKeyConstraint:
+             baseTableName: expert
+             baseColumnNames: skill_name
+             constraintName: fk_expert_skills_candidate
+             referencedTableName: skill
+             referencedColumnNames: skill_name

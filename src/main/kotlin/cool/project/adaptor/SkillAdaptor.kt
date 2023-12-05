@@ -13,7 +13,7 @@ fun CandidateSkillsEntity.toDomain() : Skill =
     skillMap[skill.skillName.lowercase()]!!
 
 fun Skill.toEntity() : SkillEntity = SkillEntity(name())
-fun SkillEntity.toDomain() : Skill = skillMap[skillName]!!
+fun SkillEntity.toDomain() : Skill = skillMap[skillName.lowercase()]!!
 
 fun Skill.toEntity(candidate : CandidateEntity, averageSkill : Double? = null) : CandidateSkillsEntity =
     CandidateSkillsEntity(SkillEntity(name()), candidate, averageSkill)

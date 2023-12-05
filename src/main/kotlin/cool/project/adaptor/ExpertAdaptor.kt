@@ -1,13 +1,19 @@
 package cool.project.adaptor
 
 
-import cool.project.domain.ExpertDomain
-import cool.project.domain.enums.SubSkillLevel
+import cool.project.domain.Expert
+import cool.project.domain.skillMap
 import cool.project.dto.entity.ExpertEntity
-import org.springframework.stereotype.Component
+import cool.project.dto.http.ExpertRequestResponse
 
-fun ExpertEntity.toDomain() : ExpertDomain =
-    ExpertDomain(name, skill.toDomain())
+fun ExpertEntity.toDomain() : Expert =
+    Expert(name, skill.toDomain())
 
-//fun ExpertDomain.toEntity() : ExpertEntity =
-//    ExpertEntity(name, skillQualifiedToAssess.toEntity())
+fun Expert.toEntity() : ExpertEntity =
+    ExpertEntity(name, skillQualifiedToAssess.toEntity())
+
+fun ExpertRequestResponse.toDomain() : Expert =
+    Expert(name, skillMap[skillQualifiedToAssess.lowercase()]!!)
+
+fun Expert.toDto() : ExpertRequestResponse =
+    ExpertRequestResponse(name, skillQualifiedToAssess.name())

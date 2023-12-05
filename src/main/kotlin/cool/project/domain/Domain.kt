@@ -7,7 +7,7 @@ data class Candidate(val name: String, val age : Int, val skills: List<Skill>, v
     fun isAdult() = age > 18
 }
 
-data class ExpertDomain(
+data class Expert(
     val name: String,
     val skillQualifiedToAssess: Skill
 )

@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface ExpertRepository : JpaRepository<ExpertEntity, Long> {
+interface ExpertRepository : JpaRepository<ExpertEntity, String> {
     fun findBySkill(@Param("skill") skill: CandidateSkillsEntity): Optional<ExpertEntity>
 }
