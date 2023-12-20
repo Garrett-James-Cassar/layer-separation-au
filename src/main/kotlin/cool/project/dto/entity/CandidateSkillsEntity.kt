@@ -6,7 +6,7 @@ import java.io.Serializable
 @Entity
 @Table(name = "candidate_skills")
 @IdClass(CandidateSkillsId::class)
-data class CandidateSkillsEntity(
+class CandidateSkillsEntity(
 
     @Id
     @ManyToOne
@@ -23,7 +23,7 @@ data class CandidateSkillsEntity(
 )
 
 @Embeddable
-data class CandidateSkillsId(
+class CandidateSkillsId(
     @ManyToOne
     @JoinColumn(name = "skill", nullable = false)
     val skill: SkillEntity,

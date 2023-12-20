@@ -4,7 +4,7 @@ import jakarta.persistence.*
 
 @Entity
 @Table(name = "candidate")
-data class CandidateEntity(
+class CandidateEntity(
 
     @Id
     @Column(name = "name", nullable = false, length = 255)

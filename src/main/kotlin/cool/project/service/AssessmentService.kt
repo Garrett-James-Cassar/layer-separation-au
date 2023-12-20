@@ -7,8 +7,8 @@ import cool.project.connectors.repositories.ExpertRepository
 import cool.project.connectors.repositories.CandidateSkillsRepository
 import cool.project.dto.http.ExpertAssessment
 import cool.project.dto.http.SubSkillAssessment
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
+import java.lang.IllegalArgumentException
 import kotlin.random.Random
 
 @Service
@@ -18,15 +18,15 @@ class AssessmentService(
     private val candidateSkillsRepository: CandidateSkillsRepository,
 ) {
 
-    fun assess(id: String): List<ExpertAssessment> {
-        val candidate = candidateRepository.findByIdOrNull(id)!!.toDomain()
+    fun assess(name: String): List<ExpertAssessment> {
+        val candidate = candidateRepository.findByName(name).toDomain()
 
         return candidate.skills.map { skill ->
             val subSkillRatings = skill.subskills.map { subSkill ->
                 SubSkillAssessment(subSkill.name, Random.nextDouble(10.0))
             }
-            val skillEntity = candidateSkillsRepository.findBySkill(skill.toEntity()).get()
-            val expert = expertRepository.findBySkill(skillEntity).get().toDomain()
+            val expertEntity = expertRepository.findBySkill(skill.toEntity()) ?: throw IllegalArgumentException("No expert to assess ${skill.name()}")
+            val expert = expertEntity.toDomain()
 
             ExpertAssessment(
                 expert.name,

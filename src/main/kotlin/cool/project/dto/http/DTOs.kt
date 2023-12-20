@@ -2,7 +2,6 @@ package cool.project.dto.http
 
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
-import cool.project.dto.entity.SkillEntity
 import io.swagger.v3.oas.annotations.media.Schema
 
 @Schema(description = "Candidate Request Response")

@@ -4,7 +4,7 @@ import jakarta.persistence.*
 
 @Entity
 @Table(name = "expert")
-data class ExpertEntity(
+class ExpertEntity(
 
     @Id
     @Column(name = "name", nullable = false)

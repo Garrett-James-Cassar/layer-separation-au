@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/persons")
+@RequestMapping("/assess")
 @Tag(
     name = "Assessment API",
     description = """
@@ -34,9 +34,9 @@ class AssessmentResource(val assessmentService: AssessmentService) {
             )
         ]
     )
-    @GetMapping("/{id}/")
-    fun getAssessment(@PathVariable id: String): ResponseEntity<AssessmentResponse> {
-        val expertFeedback = assessmentService.assess(id)
+    @GetMapping("/{candidateName}/")
+    fun getAssessment(@PathVariable candidateName: String): ResponseEntity<AssessmentResponse> {
+        val expertFeedback = assessmentService.assess(candidateName)
         return ResponseEntity.ok(AssessmentResponse(expertFeedback))
     }
 
