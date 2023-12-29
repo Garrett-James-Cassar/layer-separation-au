@@ -30,6 +30,7 @@ dependencies {
 
     runtimeOnly("com.h2database:h2")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
+    testImplementation("io.rest-assured:rest-assured:5.4.0")
     testImplementation("com.tngtech.archunit:archunit-junit5:1.1.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

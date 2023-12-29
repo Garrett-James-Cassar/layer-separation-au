@@ -1,8 +1,16 @@
 package cool.project.connectors.resource
 
 import cool.project.dto.http.AssessmentResponse
+import cool.project.error.NoCandidate
+import cool.project.error.NoExpert
+import cool.project.error.NoSkill
 import cool.project.service.AssessmentService
 import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.links.Link
+import io.swagger.v3.oas.annotations.links.LinkParameter
+import io.swagger.v3.oas.annotations.media.ArraySchema
+import io.swagger.v3.oas.annotations.media.Content
+import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -28,10 +36,23 @@ class AssessmentResource(val assessmentService: AssessmentService) {
     @Operation(summary = "Assess a candidates skills for skills registered in the  candidate  database")
     @ApiResponses(
         value = [
-            ApiResponse(
-                responseCode = "200", description = "Candidate Successfully Assessed", content = [
-                ]
-            )
+            ApiResponse(responseCode = "200", description = "Candidate Successfully Assessed",
+                content = [(Content(mediaType = "application/json", array = (ArraySchema(schema = Schema(implementation = AssessmentResponse::class)))))]),
+
+            ApiResponse(responseCode = "Candidate-404",
+                description = "Candidate specified has not been found.",
+                content = [Content(array = (ArraySchema(schema = Schema(implementation = NoCandidate::class))))]),
+
+            ApiResponse(responseCode = "Expert-404",
+                description = "An expert to serve that skill has not been found.",
+                content = [Content(array = (ArraySchema(schema = Schema(implementation = NoExpert::class))))],
+                links=[Link(description = "google.com", name = "google.com", operationRef = "google", operationId = "google", parameters = [LinkParameter(name = "goog", expression = "googex" )])]
+
+            ),
+
+            ApiResponse(responseCode = "Skill-404",
+                description = "Skill specified has not been found.",
+                content = [Content(array = (ArraySchema(schema = Schema(oneOf = [NoSkill::class], implementation = NoSkill::class))))]),
         ]
     )
     @GetMapping("/{candidateName}/")

@@ -15,7 +15,6 @@ import kotlin.random.Random
 class AssessmentService(
     private val candidateRepository: CandidateRepository,
     private val expertRepository: ExpertRepository,
-    private val candidateSkillsRepository: CandidateSkillsRepository,
 ) {
 
     fun assess(name: String): List<ExpertAssessment> {

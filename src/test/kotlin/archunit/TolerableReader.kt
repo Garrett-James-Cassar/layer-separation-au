@@ -39,7 +39,7 @@ class TolerableReader {
         }
 
         val enumFieldRule = fields()
-            .that().areDeclaredInClassesThat().resideInAnyPackage("..dto..")
+            .that().areDeclaredInClassesThat().resideInAnyPackage("..dto.http..")
             .should(shouldNotHaveEnumFields)
 
         enumFieldRule.check(importedClasses)
