@@ -5,9 +5,10 @@ import cool.project.domain.skillMap
 import cool.project.dto.entity.CandidateEntity
 import cool.project.dto.entity.CandidateSkillsEntity
 import cool.project.dto.http.CandidateRequestResponse
+import cool.project.error.NoSkillException
 import java.util.UUID
 
-fun CandidateRequestResponse.toDomain() = Candidate(name, age, skillsToAssesses.map { skillMap[it.lowercase()]!! })
+fun CandidateRequestResponse.toDomain() = Candidate(name, age, skillsToAssesses.map { skillMap[it] ?: throw NoSkillException(it) })
 
 fun CandidateEntity.toDomain() = Candidate(name, age, skills.map { it.toDomain() })
 

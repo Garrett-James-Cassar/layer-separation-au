@@ -17,7 +17,7 @@ data class NoCandidate(@JsonIgnore private val candidate : String) {
     @Schema(example = "404 NOT_FOUND")
     val httpStatus = HttpStatus.NOT_FOUND
 }
-data class NoSkill(@JsonIgnore private val skill : Skill){
+data class NoSkill(@JsonIgnore private val skill : String){
     @Schema(example = "No skill found 'Singing'!")
     val message = "No Skill found $skill!"
     @Schema(example = "404 NOT_FOUND")

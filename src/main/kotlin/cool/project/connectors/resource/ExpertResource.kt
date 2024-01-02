@@ -80,7 +80,13 @@ class ExpertController(val expertService: ExpertService) {
     @Operation(summary = "Delete a candidate by ID")
     @ApiResponses(
         value = [
-            ApiResponse(responseCode = "204", description = "Candidate deleted successfully")
+            ApiResponse(responseCode = "204", description = "Candidate deleted successfully",
+                content = [
+                    io.swagger.v3.oas.annotations.media.Content(
+                    mediaType = "application/json"
+                    )
+                ]
+            )
         ]
     )
     @DeleteMapping("/{id}")
