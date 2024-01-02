@@ -6,6 +6,7 @@ import cool.project.connectors.repositories.CandidateRepository
 import cool.project.connectors.repositories.CandidateSkillsRepository
 import cool.project.connectors.repositories.SkillsRepository
 import cool.project.domain.Candidate
+import cool.project.error.NoCandidateException
 import org.springframework.stereotype.Service
 
 @Service
@@ -24,8 +25,7 @@ class CandidateService(
 
 
     fun getCandidate(id: String): Candidate {
-        val entity = candidateRepository.findById(id).orElse(null)
-            ?: throw IllegalArgumentException("Person with ID $id not found")
+        val entity = candidateRepository.findById(id).orElse(null) ?: throw NoCandidateException(id)
         return entity.toDomain()
     }
 
@@ -33,7 +33,7 @@ class CandidateService(
 
     fun deleteCandidate(id: String) {
         if (!candidateRepository.existsById(id)) {
-            throw IllegalArgumentException("Person with ID $id not found")
+            throw NoCandidateException(id)
         }
         candidateRepository.deleteById(id)
     }

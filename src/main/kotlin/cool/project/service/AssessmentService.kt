@@ -4,11 +4,10 @@ import cool.project.adaptor.toDomain
 import cool.project.adaptor.toEntity
 import cool.project.connectors.repositories.CandidateRepository
 import cool.project.connectors.repositories.ExpertRepository
-import cool.project.connectors.repositories.CandidateSkillsRepository
 import cool.project.dto.http.ExpertAssessment
 import cool.project.dto.http.SubSkillAssessment
+import cool.project.error.NoExpertForSkillException
 import org.springframework.stereotype.Service
-import java.lang.IllegalArgumentException
 import kotlin.random.Random
 
 @Service
@@ -24,7 +23,7 @@ class AssessmentService(
             val subSkillRatings = skill.subskills.map { subSkill ->
                 SubSkillAssessment(subSkill.name, Random.nextDouble(10.0))
             }
-            val expertEntity = expertRepository.findBySkill(skill.toEntity()) ?: throw IllegalArgumentException("No expert to assess ${skill.name()}")
+            val expertEntity = expertRepository.findBySkill(skill.toEntity()) ?: throw NoExpertForSkillException(skill.name())
             val expert = expertEntity.toDomain()
 
             ExpertAssessment(
