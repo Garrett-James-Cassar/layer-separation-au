@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: Francis
   datasource:
     url: jdbc:h2:mem:testdb
     driver-class-name: org.h2.Driver
@@ -14,4 +16,26 @@ spring:
     enabled: false
     pool:
       enabled: true
+  sleuth:
+    sampler:
+      probability: 1.0
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: httptrace, health, info, metrics, beans, env, configprops, mappings, trace, auditevents, docs, shutdown
+  httpexchanges:
+    recording:
+      enabled: true
+  tracing:
+    sampling:
+      probability: 1.0
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG

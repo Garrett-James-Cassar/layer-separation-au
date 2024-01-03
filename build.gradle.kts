@@ -27,6 +27,14 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.liquibase:liquibase-core")
+    implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+
+    // tracing
+    implementation("io.micrometer:micrometer-tracing-bridge-otel:1.1.4")
+    implementation("io.opentelemetry:opentelemetry-exporter-zipkin:1.30.0")
+//    implementation("org.springframework.cloud:spring-cloud-starter-zipkin:2.2.4.RELEASE")
+
 
     runtimeOnly("com.h2database:h2")
     developmentOnly("org.springframework.boot:spring-boot-devtools")

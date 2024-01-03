@@ -30,6 +30,7 @@ class LayerSeparationTests {
                         || dependency.targetClass.packageName.contains("service")
                                 || dependency.targetClass.packageName.contains("dto")
                                 || dependency.targetClass.packageName.contains("stub.database")
+                                || dependency.targetClass.packageName.contains("error")
 
                             )
                 }

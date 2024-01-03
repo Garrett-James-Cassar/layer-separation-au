@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import mu.KotlinLogging
 
 @RestController
 @RequestMapping("/assess")
@@ -40,6 +41,19 @@ class AssessmentResource(val assessmentService: AssessmentService) {
             ApiResponse(responseCode = "404",
                 description = "Something has not been found.",
                 content = [Content(mediaType = "application/json", array = (ArraySchema(schema = Schema(implementation = ApiException::class))))]),
+        ]
+    )
+    @GetMapping("/{candidateName}/")
+    fun getAssessment(@PathVariable candidateName: String): ResponseEntity<AssessmentResponse> {
+        val expertFeedback = assessmentService.assess(candidateName)
+        return ResponseEntity.ok(AssessmentResponse(expertFeedback))
+    }
+
+}
+
+
+
+
 
 //            ApiResponse(responseCode = "404",
 //                description = "An expert to serve that skill has not been found.",
@@ -51,12 +65,3 @@ class AssessmentResource(val assessmentService: AssessmentService) {
 //            ApiResponse(responseCode = "404",
 //                description = "Skill specified has not been found.",
 //                content = [Content(mediaType = "application/json", array = (ArraySchema(schema = Schema(oneOf = [ApiException::class], implementation = ApiException::class))))]),
-        ]
-    )
-    @GetMapping("/{candidateName}/")
-    fun getAssessment(@PathVariable candidateName: String): ResponseEntity<AssessmentResponse> {
-        val expertFeedback = assessmentService.assess(candidateName)
-        return ResponseEntity.ok(AssessmentResponse(expertFeedback))
-    }
-
-}
