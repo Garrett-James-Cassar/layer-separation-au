@@ -1,9 +1,7 @@
 package cool.project.connectors.resource
 
 import cool.project.dto.http.AssessmentResponse
-import cool.project.error.NoCandidate
-import cool.project.error.NoExpert
-import cool.project.error.NoSkill
+import cool.project.error.*
 import cool.project.service.AssessmentService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.links.Link
@@ -39,20 +37,20 @@ class AssessmentResource(val assessmentService: AssessmentService) {
             ApiResponse(responseCode = "200", description = "Candidate Successfully Assessed",
                 content = [(Content(mediaType = "application/json", array = (ArraySchema(schema = Schema(implementation = AssessmentResponse::class)))))]),
 
-            ApiResponse(responseCode = "Candidate-404",
-                description = "Candidate specified has not been found.",
-                content = [Content(array = (ArraySchema(schema = Schema(implementation = NoCandidate::class))))]),
+            ApiResponse(responseCode = "404",
+                description = "Something has not been found.",
+                content = [Content(mediaType = "application/json", array = (ArraySchema(schema = Schema(implementation = ApiException::class))))]),
 
-            ApiResponse(responseCode = "Expert-404",
-                description = "An expert to serve that skill has not been found.",
-                content = [Content(array = (ArraySchema(schema = Schema(implementation = NoExpert::class))))],
-                links=[Link(description = "google.com", name = "google.com", operationRef = "google", operationId = "google", parameters = [LinkParameter(name = "goog", expression = "googex" )])]
-
-            ),
-
-            ApiResponse(responseCode = "Skill-404",
-                description = "Skill specified has not been found.",
-                content = [Content(array = (ArraySchema(schema = Schema(oneOf = [NoSkill::class], implementation = NoSkill::class))))]),
+//            ApiResponse(responseCode = "404",
+//                description = "An expert to serve that skill has not been found.",
+//                content = [Content(mediaType = "application/json", array = (ArraySchema(schema = Schema(implementation = ApiException::class))))],
+//                links=[Link(description = "google.com", name = "google.com", operationRef = "google", operationId = "google", parameters = [LinkParameter(name = "goog", expression = "googex" )])]
+//
+//            ),
+//
+//            ApiResponse(responseCode = "404",
+//                description = "Skill specified has not been found.",
+//                content = [Content(mediaType = "application/json", array = (ArraySchema(schema = Schema(oneOf = [ApiException::class], implementation = ApiException::class))))]),
         ]
     )
     @GetMapping("/{candidateName}/")

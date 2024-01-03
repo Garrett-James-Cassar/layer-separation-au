@@ -5,7 +5,6 @@ import cool.project.adaptor.toEntity
 import cool.project.connectors.repositories.ExpertRepository
 import cool.project.connectors.repositories.SkillsRepository
 import cool.project.domain.Expert
-import cool.project.error.NoExpert
 import cool.project.error.NoExpertException
 import org.springframework.stereotype.Service
 

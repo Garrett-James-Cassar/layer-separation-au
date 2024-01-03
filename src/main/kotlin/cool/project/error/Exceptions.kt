@@ -1,7 +1,10 @@
 package cool.project.error
 
+import com.fasterxml.jackson.annotation.JsonProperty
+import io.swagger.v3.oas.annotations.media.Schema
 import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatusCode
+import org.springframework.http.ResponseEntity
 import org.springframework.web.ErrorResponse
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
@@ -10,23 +13,23 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 class GlobalExceptionHandler(){
 
     @ExceptionHandler(ApiException::class)
-    fun handle (exception: ApiException): ErrorResponse {
-        val errorResponseBuilder = ErrorResponse
-            .builder(exception, exception.httpStatus, exception.message)
+    fun handle (exception: ApiException): ResponseEntity<ErrorResponse> {
+        val errorResponseBuilder = ErrorResponse.builder(exception, exception.httpStatus, exception.message)
 
         if(exception.titleMessageCode != null) errorResponseBuilder.titleMessageCode(exception.titleMessageCode)
         if(exception.properties.isNotEmpty()) exception.properties.forEach { errorResponseBuilder.property(it.key, it.value)}
 
-        return errorResponseBuilder.build()
+        return ResponseEntity(errorResponseBuilder.build(), exception.httpStatus)
     }
 
 }
 
+@Schema(description = "API Exception")
 abstract class ApiException(
-    override val message : String,
-    val httpStatus: HttpStatusCode,
-    val titleMessageCode : String? = null,
-    open val properties : Map<String, Any> = standardExceptionProperties
+    @JsonProperty override val message : String,
+    @JsonProperty val httpStatus: HttpStatusCode,
+    @JsonProperty val titleMessageCode : String? = null,
+    @JsonProperty open val properties : Map<String, Any> = standardExceptionProperties
 ) : RuntimeException(message)
 
 abstract class NotFoundException(override val message : String, notFoundProperties : Map<String, Any>) : ApiException(message, HttpStatus.NOT_FOUND, properties = standardExceptionProperties + notFoundProperties)

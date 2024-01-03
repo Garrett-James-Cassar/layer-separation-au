@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface CandidateRepository : JpaRepository<CandidateEntity, String> {
     @Query("select c from CandidateEntity c where c.name = ?1")
-    fun findByName(name: String): CandidateEntity
+    fun findByName(name: String): CandidateEntity?
 }

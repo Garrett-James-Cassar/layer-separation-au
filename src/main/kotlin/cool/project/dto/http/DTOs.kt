@@ -19,8 +19,8 @@ constructor(
     @JsonProperty("skillsToAssesses")
     @Schema(
         description = "List of skills that a candidate would like assessed",
-        example = """["Coding", "Cooking"]""",
-        allowableValues = ["Coding", "Cooking", "DancingTheFlamenco"]
+        example = "[\"Coding\", \"Cooking\"]",
+        required = true
     )
     val skillsToAssesses: List<String>
 )

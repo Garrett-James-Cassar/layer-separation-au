@@ -3,6 +3,7 @@ package cool.project.connectors.resource
 import cool.project.adaptor.toDomain
 import cool.project.adaptor.toDto
 import cool.project.dto.http.ExpertRequestResponse
+import cool.project.error.ApiException
 import cool.project.service.ExpertService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
@@ -49,6 +50,14 @@ class ExpertController(val expertService: ExpertService) {
                         schema = Schema(implementation = ExpertRequestResponse::class)
                     )
                 ]
+            ),
+            ApiResponse(
+                responseCode = "404", description = "Something Not Found", content = [
+                    io.swagger.v3.oas.annotations.media.Content(
+                        mediaType = "application/json",
+                        array = ArraySchema(schema = Schema(implementation = ApiException::class))
+                    )
+                ]
             )
         ]
     )
@@ -84,6 +93,14 @@ class ExpertController(val expertService: ExpertService) {
                 content = [
                     io.swagger.v3.oas.annotations.media.Content(
                     mediaType = "application/json"
+                    )
+                ]
+            ),
+            ApiResponse(
+                responseCode = "404", description = "Something Not Found", content = [
+                    io.swagger.v3.oas.annotations.media.Content(
+                        mediaType = "application/json",
+                        array = ArraySchema(schema = Schema(implementation = ApiException::class))
                     )
                 ]
             )

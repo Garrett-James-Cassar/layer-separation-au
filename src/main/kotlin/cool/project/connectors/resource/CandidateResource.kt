@@ -3,6 +3,7 @@ package cool.project.connectors.resource
 import cool.project.adaptor.toDomain
 import cool.project.adaptor.toDto
 import cool.project.dto.http.CandidateRequestResponse
+import cool.project.error.ApiException
 import cool.project.service.CandidateService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
@@ -76,6 +77,14 @@ class CandidateController(val candidateService: CandidateService) {
                         array = ArraySchema(schema = Schema(implementation = CandidateRequestResponse::class))
                     )
                 ]
+            ),
+            ApiResponse(
+                responseCode = "404", description = "Something Not Found", content = [
+                    io.swagger.v3.oas.annotations.media.Content(
+                        mediaType = "application/json",
+                        array = ArraySchema(schema = Schema(implementation = ApiException::class))
+                    )
+                ]
             )
         ]
     )
@@ -90,6 +99,14 @@ class CandidateController(val candidateService: CandidateService) {
         value = [
             ApiResponse(responseCode = "204", description = "Candidate deleted successfully",
                     content = [io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json")]
+            ),
+            ApiResponse(
+                responseCode = "404", description = "Something Not Found", content = [
+                    io.swagger.v3.oas.annotations.media.Content(
+                        mediaType = "application/json",
+                        array = ArraySchema(schema = Schema(implementation = ApiException::class))
+                    )
+                ]
             )
         ]
     )
